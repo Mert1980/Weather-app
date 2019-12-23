@@ -1,7 +1,7 @@
 const request = require("request");
 
 const url =
-  "https://api.darksky.net/forecast/04b7a140f48a161bab606bc04471c4fe/37.8267,-122.4233";
+  "https://api.darksky.net/forecast/04b7a140f48a161bab606bc04471c4fe/37.8267,-122.4233?units=si&";
 
 request({ url: url, json: true }, (error, response) => {
   // const data = JSON.parse(response.body)
@@ -10,7 +10,8 @@ request({ url: url, json: true }, (error, response) => {
   // console.log(response.body.currently);
   const temp = response.body.currently.temperature;
   const rain = response.body.currently.precipProbability;
+  const dailySummary = response.body.daily.data[0].summary;
   console.log(
-    `It's currently ${temp} degrees out. There is a ${rain}% chance of rain.`
+    `${dailySummary} It's currently ${temp} degrees out. There is a ${rain}% chance of rain.`
   );
 });
