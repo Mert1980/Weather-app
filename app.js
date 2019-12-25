@@ -1,4 +1,5 @@
 const request = require("request");
+const geoCode = require("./utils/geocode");
 
 // const url =
 //   "https://api.darksky.net/forecast/04b7a140f48a161bab606bc04471c4fe/37.8267,-122.4233?units=si";
@@ -39,26 +40,6 @@ const request = require("request");
 //     console.log(`Lat: ${latitude}, Long:${longitude}`);
 //   }
 // });
-
-const geoCode = (address, callback) => {
-  const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(address)}.json?access_token=pk.eyJ1IjoibWF0dDE5ODAiLCJhIjoiY2s0anNld2xmMHpoZDNsbnRoaGk0M250dSJ9.5WtKXyPXAsexEUjjFgeqQA&limit=1`;
-  request({ url: url, json: true }, (error, response) => {
-    if (error) {
-      callback("Unable to connect to location services!", undefined);
-    } else if (response.body.features.length === 0) {
-      callback(
-        "Unable to find the location. Please update the search terms!",
-        undefined
-      );
-    } else {
-      callback(undefined, {
-        latitude: response.body.features[0].center[1],
-        longitude: response.body.features[0].center[0],
-        location: response.body.features[0].place_name
-      });
-    }
-  });
-};
 
 geoCode("leuven", (error, data) => {
   console.log("error", error);
