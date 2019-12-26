@@ -2,9 +2,9 @@ const path = require('path') // path is a core node module, so no need to instal
 const express = require("express"); // express is a function
 
 const app = express();
-
 const publicDirectoryPath = path.join(__dirname, '../public')
 
+app.set('view engine', 'hbs');
 app.use(express.static(publicDirectoryPath))
 // we pass the return value of express.static function into app.use
 
