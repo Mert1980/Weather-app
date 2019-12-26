@@ -27,6 +27,13 @@ app.get('/about', (req, res)=>{
   }); 
 });
 
+app.get('/help', (req, res)=>{
+  res.render('help', {
+    title: 'Help',
+    message: 'Please submit the form below to reach out help from our support centre'
+  }); 
+});
+
 app.get("/weather", (req, res) => {
   res.send({
     location: "Leuven",
