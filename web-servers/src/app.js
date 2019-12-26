@@ -20,6 +20,13 @@ app.get('', (req, res)=>{
   And in this case we've proved that happens by viewing it over in the browser. */
 })
 
+app.get('/about', (req, res)=>{
+  res.render('about', {
+    title: 'About Me',
+    name: 'Mert Demirok'
+  }); 
+});
+
 app.get("/weather", (req, res) => {
   res.send({
     location: "Leuven",
