@@ -8,6 +8,13 @@ app.set('view engine', 'hbs');
 app.use(express.static(publicDirectoryPath))
 // we pass the return value of express.static function into app.use
 
+app.get('', (req, res)=>{
+  res.render('index'); /* rendering static content with hbs module
+  So by calling response.render, express goes off and gets that view. It then
+  converts it into HTML and to make sure that HTML gets back to the requester.
+  And in this case we've proved that happens by viewing it over in the browser. */
+})
+
 app.get("/weather", (req, res) => {
   res.send({
     location: "Leuven",
