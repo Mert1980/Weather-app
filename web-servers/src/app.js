@@ -1,6 +1,14 @@
+const path = require('path') // path is a core node module, so no need to install it!
 const express = require("express"); // express is a function
 
 const app = express();
+
+// console.log(__dirname)
+// console.log(path.join(__dirname, '../public'))
+const publicDirectoryPath = path.join(__dirname, '../public')
+
+app.use(express.static(publicDirectoryPath))
+// we pass the return value of express.static function into app.use
 
 app.get("/", (req, res) => {
   res.send("<h1>Welcome</h1>");
