@@ -1,7 +1,5 @@
 const request = require("request");
 const chalk = require('chalk');
-const url =
-  "https://api.darksky.net/forecast/04b7a140f48a161bab606bc04471c4fe/37.8267,-122.4233?units=si";
 
 const forecast = (longitude, latitude, callback) => {
   const url = `https://api.darksky.net/forecast/04b7a140f48a161bab606bc04471c4fe/${longitude},${latitude}?units=si`;
