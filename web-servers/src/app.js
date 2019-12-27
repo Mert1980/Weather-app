@@ -39,6 +39,7 @@ app.get('/about', (req, res)=>{
 app.get('/help', (req, res)=>{
   res.render('help', {
     title: 'Help',
+    name: 'Mert Demirok',
     message: 'Please submit the form below to reach out help from our support centre'
   }); 
 });
