@@ -1,21 +1,73 @@
+const path = require("path"); // path is a core node module, so no need to install it!
 const express = require("express"); // express is a function
+const hbs = require("hbs");
 
 const app = express();
 
-app.get("/", (req, res) => {
-  res.send("Hello Express!");
-});
+// Define paths for express config
+const publicDirectoryPath = path.join(__dirname, "../public");
+const viewsPath = path.join(__dirname, "../templates/views");
+const partialsPath = path.join(__dirname, "../templates/partials");
 
-app.get("/help", (req, res) => {
-  res.send("Help Page");
+// Setup handlebars engine and views location
+app.set("view engine", "hbs");
+app.set("views", viewsPath);
+hbs.registerPartials(partialsPath);
+
+// Set up static directory to serve
+app.use(express.static(publicDirectoryPath)); // we pass the return value of express.static function into app.use
+
+app.get("", (req, res) => {
+  res.render("index", {
+    title: "Weather",
+    name: "Mert Demirok"
+  });
+
+  /* rendering static content with hbs module
+  So by calling response.render, express goes off and gets that view. It then
+  converts it into HTML and to make sure that HTML gets back to the requester.
+  And in this case we've proved that happens by viewing it over in the browser. */
 });
 
 app.get("/about", (req, res) => {
-  res.send("It is all about weather!");
+  res.render("about", {
+    title: "About Me",
+    name: "Mert Demirok"
+  });
+});
+
+app.get("/help", (req, res) => {
+  res.render("help", {
+    title: "Help",
+    name: "Mert Demirok",
+    message:
+      "Please submit the form below to reach out help from our support centre"
+  });
 });
 
 app.get("/weather", (req, res) => {
-  res.send("Please find the current weather report");
+  res.send({
+    location: "Leuven",
+    forecast: "It is 5 degrees and 5% chance of rain"
+  });
+});
+
+app.get("/help/*", (req, res) => {
+  // * means, match anything after /help url that hasn't matched so far
+  res.render("404", {
+    title: "404",
+    name: "Mert Demirok",
+    errorMessage: "Help article not found"
+  });
+});
+
+app.get("*", (req, res) => {
+  // * means, match anything that hasn't matched so far
+  res.render("404", {
+    title: "404",
+    name: "Mert Demirok",
+    errorMessage: "Page not found"
+  });
 });
 
 app.listen(3000, () => {
