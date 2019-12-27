@@ -1,15 +1,18 @@
 const path = require('path') // path is a core node module, so no need to install it!
 const express = require("express"); // express is a function
+const hbs = require ('hbs');
 
 const app = express();
 
 // Define paths for express config
 const publicDirectoryPath = path.join(__dirname, '../public')
-const viewsPath = path.join(__dirname, '../templates');
+const viewsPath = path.join(__dirname, '../templates/views');
+const partialsPath = path.join(__dirname, '../templates/partials');
 
 // Setup handlebars engine and views location 
 app.set('view engine', 'hbs');
 app.set('views', viewsPath);
+hbs.registerPartials(partialsPath);
 
 // Set up static directory to serve
 app.use(express.static(publicDirectoryPath)) // we pass the return value of express.static function into app.use
