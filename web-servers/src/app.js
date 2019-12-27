@@ -51,6 +51,14 @@ app.get("/weather", (req, res) => {
   });
 });
 
+app.get('/help/*', (req, res)=>{ // * means, match anything after /help url that hasn't matched so far
+  res.send('Help article not found')
+})
+
+app.get('*', (req, res)=>{ // * means, match anything that hasn't matched so far
+  res.send('My 404 page')
+})
+
 app.listen(3000, () => {
   console.log(`The server is listening on port number 3000`);
 });
