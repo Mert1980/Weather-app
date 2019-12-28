@@ -53,7 +53,7 @@ app.get("/weather", (req, res) => {
       error: "Address must be provided!"
     });
   }
-  geoCode(req.query.address, (error, { latitude, longitude, location }) => {
+  geoCode(req.query.address, (error, { latitude, longitude, location }={}) => {
     if (error) {
       return res.send({ error }); // shorthand property used instead of {error: error}
     }
