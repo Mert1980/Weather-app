@@ -1,6 +1,8 @@
 const path = require("path"); // path is a core node module, so no need to install it!
 const express = require("express"); // express is a function
 const hbs = require("hbs");
+const geoCode = require("./utils/geocode");
+const forecast = require("./utils/forecast");
 
 const app = express();
 
@@ -51,10 +53,20 @@ app.get("/weather", (req, res) => {
       error: "Address must be provided!"
     });
   }
-  res.send({
-    address : req.query.address,
-    location: "Leuven",
-    forecast: "It is 5 degrees and 5% chance of rain"
+  geoCode(req.query.address, (error, { latitude, longitude, location }) => {
+    if (error) {
+      return res.send({ error }); // shorthand property used instead of {error: error}
+    }
+    forecast(latitude, longitude, (error, forecastData) => {
+      if (error) {
+        return res.send({ error }); // shorthand property used 
+      }
+      res.send({
+        address: req.query.address,
+        location, // shorthand property used 
+        forecast: forecastData
+      });
+    });
   });
 });
 
