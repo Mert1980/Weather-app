@@ -12,6 +12,7 @@ fetch("http://localhost:3000/weather/?address=leuven").then(response => {
 });
 
 const weatherForm = document.querySelector("form");
-weatherForm.addEventListener("submit", () => {
+weatherForm.addEventListener("submit", (e) => {
+  e.preventDefault() // this prevents refreshing the page by default
   console.log("testing!");
 });
