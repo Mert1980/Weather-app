@@ -46,23 +46,29 @@ app.get("/help", (req, res) => {
 });
 
 app.get("/weather", (req, res) => {
+  if (!req.query.address) {
+    return res.send({
+      error: "Address must be provided!"
+    });
+  }
   res.send({
+    address : req.query.address,
     location: "Leuven",
     forecast: "It is 5 degrees and 5% chance of rain"
   });
 });
 
-app.get("/products", (req, res)=>{
-  if (!req.query.search){
+app.get("/products", (req, res) => {
+  if (!req.query.search) {
     return res.send({
       error: "You must provide a search term!"
-    })
+    });
   }
-  console.log(req.query.search)
+  console.log(req.query.search);
   res.send({
     product: "[]"
-  })
-})
+  });
+});
 
 app.get("/help/*", (req, res) => {
   // * means, match anything after /help url that hasn't matched so far
