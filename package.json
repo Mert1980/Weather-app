@@ -1,5 +1,5 @@
 {
-  "name": "Weather-app",
+  "name": "weather_app",
   "version": "1.0.0",
   "description": "Weather web application (asynchronous)",
   "main": "app.js",
