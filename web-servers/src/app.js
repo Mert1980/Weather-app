@@ -43,7 +43,7 @@ app.get("/help", (req, res) => {
     title: "Help",
     name: "Mert Demirok",
     message:
-      "Please submit the form below to reach out help from our support centre"
+      "This is some helpful text"
   });
 });
 
