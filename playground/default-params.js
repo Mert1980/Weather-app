@@ -22,4 +22,4 @@ const greeting = (name = "New User", age = 100) => {
   console.log(`Hello ${name}, you are ${age} years old.`);
 };
 
-greeting(25); // returns : Hello 25, you are 100 years old
+greeting(25); // --> returns : Hello 25, you are 100 years old
